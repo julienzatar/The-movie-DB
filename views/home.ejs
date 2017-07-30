@@ -82,6 +82,7 @@
 							<div  id="<%=i%>" class="movie">
 								<figure class="movie-poster"><img src="<%=moviesPop[i].poster%>" alt="#"></figure>
 								<div class="movie-title"><a href="/single"><%=moviesPop[i].title %></a> <a href="/review?movieid=<%= moviesPop[i].id %>" id="<%=className%>" ><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+								<button type="button" class=""><a href="/basket?movieid=<%= moviesPop[i].id%>">5$</a></button>
 								</div>
 								<p><%=moviesPop[i].desc %></p>
 							</div>

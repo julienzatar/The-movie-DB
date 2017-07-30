@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Movie Review | Basket</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="/css/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="/css/style.css">
+
+		<script
+		  src="https://code.jquery.com/jquery-1.12.4.js"
+		  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+		  crossorigin="anonymous"></script>
+		  <script
+		  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+		  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+		  crossorigin="anonymous"></script>
+		
+
+	</head>
+
+
+	<body>
+		
+
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<a href="/home" id="branding">
+						<img src="/css/images/logo.png" alt="" class="logo">
+						<div class="logo-copy">
+							<h1 class="site-title">Moviz</h1>
+							<small class="site-description">Manage your best movies</small>
+						</div>
+					</a> <!-- #branding -->
+
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item  current-menu-item"><a href="/home">Last releases</a></li>
+							<li class="menu-item"><a href="/review">My movies</a></li>
+							<li class="menu-item"><a href="/contact">Contact</a></li>
+						</ul> <!-- .menu -->
+
+						<form action="#" class="search-form">
+							<input type="text" placeholder="Search...">
+							<button><i class="fa fa-search"></i></button>
+						</form>
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+				</div>
+			</header>
+			<main class="main-content">
+				<div class="container">
+				<h1 style="text-align: center">Hello <%= firstname  %> </h1>
+				<button style="text-align: center"><a href="/payment">Total à payer = <%= 5*movies.length %> $</a></button>
+					<div class="page">
+							
+						 <%
+							for(var i = 0; i < movies.length ; i++) {
+						 %>
+
+						<div class="movie-list">
+
+							<div  id="<%= movies[i].movieID %>" class="movie">
+								<figure class="movie-poster"><img src="<%= movies[i].poster %>" alt="#"></figure>
+								<div class="movie-title"><%= movies[i].title%></div>	
+								<p>5$ to pay</p>
+							</div>
+
+						</div> <!-- .movie-list -->
+
+						<% } %>
+					</div>
+				</div> <!-- .container -->
+			</main>
+		
+		</div>
+		<!-- Default snippet for navigation -->
+		
+		<script src="/js/script.js"></script>
+		<script src="/js/plugins.js"></script>
+		<script src="/js/app.js"></script>
+		
+	</body>
+
+</html>

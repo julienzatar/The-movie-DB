@@ -2,6 +2,9 @@ var express  = require('express');
 var request  = require('request');
 var mongoose = require('mongoose');
 var session = require("express-session");
+var stripe = require("stripe")(
+  "sk_test_qFjWvz6WDKzmKtox6HDN0xvM"
+);
 
 var app = express();
 app.use(express.static('public'));
@@ -111,6 +114,8 @@ app.get('/login', function (req,res) {
 					req.session.firstname = users.firstname;
 					req.session.DBid = users._id;
 					req.session.log = true;
+					req.session.basket = [];
+
 
 	 			res.redirect('/home');
 	 		} else {
@@ -142,6 +147,53 @@ app.get ('/logout' , function (req,res) {
 app.get('/' , function (req, res) {
 
 	res.redirect('/home');
+});
+
+app.get('/basket' , function (req, res) {
+
+
+
+	if(req.session.log == true) {
+
+	request("https://api.themoviedb.org/3/movie/"+req.query.movieid+"?api_key=9819ed560f7ba44c757b5bec6e3f8e64&language=fr-FR", function(error, response, body) {
+
+	body = JSON.parse(body);
+
+	if (req.query.movieid != undefined) {
+		req.session.basket.push({
+			movieID:req.query.movieid, 
+			title:body.original_title, 
+			poster:"https://image.tmdb.org/t/p/w780"+body.poster_path}
+			);
+	
+	};
+
+	console.log(req.session.basket);
+
+
+	res.render('basket', {
+		name : req.session.name,
+		firstname : req.session.firstname,
+		userId : req.session.DBid,
+		movies : req.session.basket,
+
+	});
+
+	});
+		
+	}
+
+	else {
+
+		res.render('login', {
+	 		action : 'login',
+	 		error : null
+	 	});
+
+	}
+});
+app.get('/payment' , function (req, res) {
+	res.render('payment');
 });
 
 
